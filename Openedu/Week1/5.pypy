@@ -15,4 +15,4 @@ for i in range(len(array)):
 
 file_output.write("No more swaps needed.\n")
 for element in array:
-    file_output.write(str(element) + " ")
+    file_output.write(f"{element} ")
