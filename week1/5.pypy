@@ -1,0 +1,18 @@
+file_input = open("input.txt", "r")
+file_output = open("output.txt", "w")
+
+size = file_input.readline()
+array = [int(x) for x in file_input.read().split()] 
+
+for i in range(len(array)):
+    min_element_index = i
+    for j in range(i + 1, len(array)):
+        if array[min_element_index] > array[j]:
+            min_element_index = j
+    if min_element_index != i:
+        array[i], array[min_element_index] = array[min_element_index], array[i]
+        file_output.write(f"Swap elements at indices {i + 1} and {min_element_index + 1}.\n")
+
+file_output.write("No more swaps needed.\n")
+for element in array:
+    file_output.write(str(element) + " ")
