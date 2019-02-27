@@ -1,4 +1,4 @@
-file_input = open("input.txt", "r")
-file_output = open("output.txt", "w")
-a, b = file_input.read().split()
-file_output.write(str(int(a) + int(b)))
+with open("input.txt", "r") as file_input:
+    a, b = [int(x) for x in file_input.readline().split()]
+with open("output.txt", "w") as file_output:
+    file_output.write(f"{a + b}")

@@ -1,23 +1,23 @@
-file_input = open("input.txt", "r")
-file_output = open("output.txt", "w")
+with open("input.txt", "r") as file_input:
+    size = int(file_input.readline())
+    array = [int(x) for x in file_input.readline().split()]
 
-size = file_input.readline()
-array = file_input.read().split()
-result = [int(array[0])]
+result = [array[0]]
 result_indicies = [1]
 
-for i in range(1, int(size)):
+for i in range(1, size):
     for j in range(len(result)):
-        if int(array[i]) < result[j]:
-            result.insert(j, int(array[i]))
+        if array[i] < result[j]:
+            result.insert(j, array[i])
             result_indicies.append(j + 1)
             break
     else:
-        result.append(int(array[i]))
+        result.append(array[i])
         result_indicies.append(len(result))
 
-for r in result_indicies:
-    file_output.write(f"{r} ")
-file_output.write('\n')
-for r in result:
-    file_output.write(f"{r} ")
+with open("output.txt", "w") as file_output:
+    for r in result_indicies:
+        file_output.write(f"{r} ")
+    file_output.write('\n')
+    for r in result:
+        file_output.write(f"{r} ")
