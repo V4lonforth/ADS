@@ -1,0 +1,41 @@
+def quicksort(nums, first, last, k):
+   if first >= last: 
+       return
+ 
+   i, j = first, last
+   pivot = nums[(last - first) // (k * 2) * k + first]
+ 
+   while i <= j:
+       while nums[i] < pivot: 
+           i += k
+       while nums[j] > pivot: 
+           j -= k
+       if i <= j:
+           nums[i], nums[j] = nums[j], nums[i]
+           i, j = i + k, j - k
+
+   quicksort(nums, first, j, k)
+   quicksort(nums, i, last, k)
+   
+def read_line(file_input):
+    return [int(x) for x in file_input.readline().split()]
+
+
+with open("input.txt", "r") as file_input:
+    n, k = read_line(file_input)
+    array = read_line(file_input)
+
+offset = n - n % k
+for i in range(k):
+    index = i + offset
+    quicksort(array, i, index if index < n else index - k, k)
+
+result = True
+
+for i in range(n - 1):
+    if array[i] > array[i + 1]:
+        result = False
+        break
+
+with open("output.txt", "w") as file_output:
+    file_output.write("YES" if result else "NO")

@@ -10,7 +10,7 @@ namespace ADS
         
         public static void Quicksort(int[] elements, int left, int right, int k1, int k2)
         {
-            if (left > k2 - 1 || right < k1 - 1)
+            if (left >= right || left > k2 - 1 || right < k1 - 1)
                 return;
 
             int i = left, j = right;
@@ -19,14 +19,9 @@ namespace ADS
             while (i <= j)
             {
                 while (elements[i].CompareTo(pivot) < 0)
-                {
                     i++;
-                }
-
                 while (elements[j].CompareTo(pivot) > 0)
-                {
                     j--;
-                }
 
                 if (i <= j)
                 {
@@ -38,14 +33,8 @@ namespace ADS
                 }
             }
 
-            if (left < j)
-            {
-                Quicksort(elements, left, j, k1, k2);
-            }
-            if (i < right)
-            {
-                Quicksort(elements, i, right, k1, k2);
-            }
+            Quicksort(elements, left, j, k1, k2);
+            Quicksort(elements, i, right, k1, k2);
         }
 
         static void Main(string[] args)
@@ -66,12 +55,14 @@ namespace ADS
             int[] array = new int[n];
             array[0] = Convert.ToInt32(str[3]);
             array[1] = Convert.ToInt32(str[4]);
+
             for (int i = 2; i < n; i++)
             {
                 array[i] = A * array[i - 2] + B * array[i - 1] + C;
             }
 
             Quicksort(array, 0, n - 1, k1, k2);
+
             for (int i = k1; i <= k2; i++)
             {
                 streamWriter.Write("{0} ", array[i - 1]);

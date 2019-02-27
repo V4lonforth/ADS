@@ -1,3 +1,25 @@
+def sort_array(array, file_output):
+    size = len(array)
+    buffer_array = [0 for i in range(size)]
+
+    merging_size = 1
+    while merging_size < size:
+        first_array_begin = 0
+        while first_array_begin < size:
+            second_array_end = first_array_begin + merging_size * 2 - 1
+            
+            first_array_end = (first_array_begin + second_array_end) // 2 - (first_array_begin + second_array_end + 1) % 2
+            second_array_begin = first_array_end + 1
+
+            if (second_array_begin < size):
+                if (second_array_end >= size):
+                    second_array_end = size - 1
+                merge_array(array, buffer_array, first_array_begin, first_array_end, second_array_begin, second_array_end)
+                
+            first_array_begin += merging_size * 2
+        merging_size *= 2
+    return
+
 def merge_array(array, buffer_array, first_array_begin, first_array_end, second_array_begin, second_array_end):
     sorted_elements_count = 0
     begin = first_array_begin
@@ -25,35 +47,12 @@ def merge_array(array, buffer_array, first_array_begin, first_array_end, second_
     file_output.write(f"{begin + 1} {end + 1} {array[begin]} {array[end]}\n")
     return
 
-def sort_array(array, file_output):
-    size = len(array)
-    buffer_array = [0] * size
 
-    sorting_size = 2
-    while (sorting_size < size * 2):
-        first_array_begin = 0
-        while (first_array_begin < size):
-            second_array_end = first_array_begin + sorting_size - 1
-            
-            first_array_end = (first_array_begin + second_array_end) // 2 - (first_array_begin + second_array_end + 1) % 2
-            second_array_begin = first_array_end + 1
+with open("input.txt", "r") as file_input:
+    size = int(file_input.readline())
+    array = [int(x) for x in file_input.read().split()] 
 
-            if (second_array_begin < size):
-                if (second_array_end >= size):
-                    second_array_end = size - 1
-                merge_array(array, buffer_array, first_array_begin, first_array_end, second_array_begin, second_array_end)
-                
-            first_array_begin += sorting_size
-        sorting_size *= 2
-    return
-
-file_input = open("input.txt", "r")
-file_output = open("output.txt", "w")
-
-size = file_input.readline()
-array = [int(x) for x in file_input.read().split()] 
-
-sort_array(array, file_output)
-
-for element in array:
-    file_output.write(f"{element} ")
+with open("output.txt", "w") as file_output:
+    sort_array(array, file_output)
+    for element in array:
+        file_output.write(f"{element} ")

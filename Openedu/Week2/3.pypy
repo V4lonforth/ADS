@@ -1,15 +1,15 @@
-def anti_quick_sort(array, n):
+def add_element(array, n):
     array.append(n)
     middle = (n - 1) // 2
     array[n - 1], array[middle] = array[middle], array[n - 1]
 
-file_input = open("input.txt", "r")
-file_output = open("output.txt", "w")
+with open("input.txt", "r") as file_input:
+    size = int(file_input.readline())
 
-size = int(file_input.readline())
 array = [1, 2]
 for ind in range(2, size):
-    anti_quick_sort(array, ind + 1)
+    add_element(array, ind + 1)
 
-for ind in range(0, min(size, len(array))):
-    file_output.write(f"{array[ind]} ")
+with open("output.txt", "w") as file_output:
+    for ind in range(0, min(size, len(array))):
+        file_output.write(f"{array[ind]} ")
