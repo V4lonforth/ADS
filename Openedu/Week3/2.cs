@@ -6,7 +6,7 @@ namespace ADS.Week3
 {
     public class Task2
     {
-        private static int[] RadixSort(string[] strings, int n, int m, int iterationsCount)
+        private static int[] RadixSort(string[] strings, int n, int m, int k)
         {
             int[] count = new int['z' - 'a' + 1];
             int[] indicies = new int[n];
@@ -17,7 +17,7 @@ namespace ADS.Week3
                 indicies[i] = i;
             }
 
-            for (int i = m - 1; i >= m - iterationsCount ; i--)
+            for (int i = m - 1; i >= m - k ; i--)
             {
                 Array.Clear(count, 0, count.Length);
                 for (int j = 0; j < n; j++)
