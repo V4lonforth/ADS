@@ -55,11 +55,11 @@ namespace ADS.Week4
                                 stack.Push('[');
                                 break;
                             case ']':
-                                if (stack.Pop() != '[')
+                                if (stack.Size == 0 || stack.Pop() != '[')
                                     result = false;
                                 break;
                             case ')':
-                                if (stack.Pop() != '(')
+                                if (stack.Size == 0 || stack.Pop() != '(')
                                 result = false;
                                 break;
                         }
