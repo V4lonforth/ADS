@@ -4,33 +4,6 @@ using System.Collections.Generic;
 
 namespace ADS.Week4
 {
-    public class Stack<T>
-    {
-        private List<T> elements;
-
-        public int Size
-        {
-            get 
-            {
-                return elements.Count;
-            }
-        }
-
-        public Stack()
-        {
-            elements = new List<T>();
-        }
-        public void Push(T element)
-        {
-            elements.Add(element);
-        }
-        public T Pop()
-        {
-            T element = elements[elements.Count - 1];
-            elements.RemoveAt(elements.Count - 1);
-            return element;
-        }
-    }
     public class Task3
     {
         public static void Main(string[] args)

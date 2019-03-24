@@ -7,7 +7,8 @@ namespace ADS.Week4
     public class Stack<T>
     {
         private List<T> elements;
-
+        public int Size { get  { return elements.Count; } }
+        
         public Stack()
         {
             elements = new List<T>();

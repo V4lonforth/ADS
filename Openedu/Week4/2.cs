@@ -6,30 +6,35 @@ namespace ADS.Week4
 {
     public class Queue<T>
     {
-        private List<T> elements;
+        private class LinkedElement
+        {
+            public T Value { get; set; }
+            public LinkedElement NextElement { get; set; }
 
-        private int removedElements;
-
-        private const int maxRemovedElements = 1000;
-        public Queue()
-        {
-            elements = new List<T>();
-            removedElements = 0;
-        }
-        public void Push(T element)
-        {
-            elements.Add(element);
-        }
-        public T Pop()
-        {
-            T element = elements[removedElements];
-            removedElements++;
-            if (removedElements >= maxRemovedElements)
+            public LinkedElement(T value)
             {
-                elements.RemoveRange(0, removedElements);
-                removedElements = 0;
+                Value = value;
             }
-            return element;
+        }
+        private LinkedElement first;
+        private LinkedElement last;
+
+        public void Enqueue(T element)
+        {
+            LinkedElement newElement = new LinkedElement(element);
+            if (first != null)
+                first.NextElement = newElement;
+            else
+                last = newElement;
+            first = newElement;
+        }
+        public T Dequeue()
+        {
+            T value = last.Value;
+            last = last.NextElement;
+            if (last == null)
+                first = null;
+            return value;
         }
     }
     public class Task2
@@ -47,11 +52,11 @@ namespace ADS.Week4
                     String[] str = streamReader.ReadLine().Split(' ');
                     if ("+".Equals(str[0]))
                     {
-                        queue.Push(int.Parse(str[1]));
+                        queue.Enqueue(int.Parse(str[1]));
                     }
                     else
                     {
-                        streamWriter.WriteLine(queue.Pop());
+                        streamWriter.WriteLine(queue.Dequeue());
                     }
                 }
             }
