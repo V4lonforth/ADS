@@ -98,7 +98,7 @@ namespace Stepik.GreedyAlgorithms
             }
 
             List<TreeBranch> lettersCount = new List<TreeBranch>();
-            for (int i = 0; i < 'z' - 'a'; i++)
+            for (int i = 0; i <= 'z' - 'a'; i++)
                 if (count[i] > 0)
                     lettersCount.Add(new TreeBranch( new List<LetterCode>() { new LetterCode((char)('a' + i), "") }, count[i]));
 
